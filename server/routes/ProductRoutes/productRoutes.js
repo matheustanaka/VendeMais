@@ -5,26 +5,24 @@ const ProductModel = require("../../models/Product");
 const router = express.Router();
 
 // Create a new product
-router.post("/products", requiresAuth(), async (req, res) => {
+router.post("/test/products", async (req, res) => {
   try {
-    const productData = {
-      ...req.body,
-      user: req.session.user._id,
-    };
+    const newProduct = new ProductModel(req.body);
 
-    const newProduct = new ProductModel(productData);
     await newProduct.save();
+
     res.status(201).json(newProduct);
   } catch (error) {
-    res.status(400).json({ error: "It could not create a product" });
+    res
+      .status(400)
+      .json({ error: "It could not create a product", details: error.message });
   }
 });
 
 // Get all products of the logged-in user
-router.get("/products", requiresAuth(), async (req, res) => {
+router.get("/products", async (req, res) => {
   try {
-    const userId = req.session.user._id;
-    const products = await ProductModel.find({ user: userId });
+    const products = await ProductModel.find();
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ error: "Error fetching products" });

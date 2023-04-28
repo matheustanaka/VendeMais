@@ -24,7 +24,7 @@ app.use(auth(authConfig));
 
 // Routes
 app.use(UserRouter);
-app.use("/api", ProductRouter);
+app.use(ProductRouter);
 
 connectDatabase();
 
