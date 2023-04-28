@@ -18,6 +18,15 @@ const signUp = async (req, res) => {
 
 const logout = async (req, res) => {
   try {
+    if (req.session) {
+      req.session.destroy((err) => {
+        if (err) {
+          console.log("An error occurred while destroying the session");
+        } else {
+          console.log("Session destroyed");
+        }
+      });
+    }
     console.log(
       `User ${req.session.user.name} (${req.session.user.email}) is logging out.`
     );
