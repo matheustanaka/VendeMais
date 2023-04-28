@@ -22,11 +22,11 @@ router.get("/signin", signIn);
 router.get("/signup", signUp);
 
 router.get("/logout", logout);
-
-router.get("/api/sales", (req, res) => {
+/*
+router.get("/sales", (req, res) => {
   // console.log(req.session);
-  res.send(`Welcome, ${req.session.user.name}!`);
-});
+  // res.send(`Welcome, ${req.session.user.name}!`);
+}); */
 
 router.get("/api/authenticated", findOrCreateUserMiddleware, authenticated);
 

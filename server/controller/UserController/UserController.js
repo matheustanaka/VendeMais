@@ -38,10 +38,11 @@ const logout = async (req, res) => {
 
 const authenticated = async (req, res) => {
   try {
+    /*
     console.log(
       `User ${req.session.user.name} (${req.session.user.email}) has logged in.`
-    );
-    res.redirect("/api/sales");
+    ); */
+    res.redirect("/sales");
   } catch (error) {
     console.log(error);
   }
