@@ -10,6 +10,7 @@ const sessionConfig = require("./config/session");
 // routes
 const UserRouter = require("./routes/UserRoutes/userRoutes");
 const ProductRouter = require("./routes/ProductRoutes/productRoutes");
+const SalesRouter = require("./routes/SalesRoutes/salesRoutes");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -25,6 +26,7 @@ app.use(auth(authConfig));
 // Routes
 app.use(UserRouter);
 app.use(ProductRouter);
+app.use(SalesRouter);
 
 connectDatabase();
 
