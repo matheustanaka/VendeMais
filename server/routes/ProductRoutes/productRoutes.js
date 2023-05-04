@@ -1,5 +1,4 @@
 const express = require("express");
-const { requiresAuth } = require("express-openid-connect");
 const {
   createProduct,
   getAllProduct,
@@ -7,20 +6,20 @@ const {
   deleteProduct,
 } = require("../../controller/ProductController/ProductController");
 
+const authMiddleware = require("../../middleware/authMiddleware");
+
 const router = express.Router();
 
-// TO-DO: Needs to add requiresAuth() middleware on all routes.
-
 // Create a new product.
-router.post("/products", createProduct);
+router.post("/products", authMiddleware, createProduct);
 
 // Get all products of the logged-in user.
-router.get("/products", getAllProduct);
+router.get("/products", authMiddleware, getAllProduct);
 
 // Update a product.
-router.put("/products/:id", updateProduct);
+router.put("/products/:id", authMiddleware, updateProduct);
 
 // Delete a product.
-router.delete("/products/:id", deleteProduct);
+router.delete("/products/:id", authMiddleware, deleteProduct);
 
 module.exports = router;
