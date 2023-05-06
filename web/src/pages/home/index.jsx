@@ -1,28 +1,10 @@
-import Login from "../../components/Login";
+import { Header } from "../../components/Header";
 import "./style.scss";
 
 export function Home() {
   return (
     <div>
-      <header className="main-header">
-        <div className="logo">
-          <h1>Vende+</h1>
-        </div>
-        <div className="list">
-          <ul className="list-btns">
-            <li>
-              <a href="">Sobre nós</a>
-            </li>
-            <li>
-              <a href="">Clientes</a>
-            </li>
-            <li>
-              <a href="">Precos</a>
-            </li>
-          </ul>
-        </div>
-        <Login />
-      </header>
+      <Header />
       <section className="wrapper">
         <div className="content">
           <h1 className="title">
