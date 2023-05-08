@@ -1,12 +1,16 @@
 import { auth, googleProvider } from "../../services/firebaseConfig";
-import { signInWithPopup, getIdToken } from "firebase/auth";
+import { signInWithPopup, getIdToken, getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 import "./style.scss";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
+
       console.log("UserCredential object:", result);
 
       const idToken = await getIdToken(result.user);
@@ -22,6 +26,19 @@ const Login = () => {
 
       const data = await response.json();
       console.log("Server response:", data);
+
+      const authState = getAuth();
+
+      // Verify auth state to navigate into sales page
+      authState.onAuthStateChanged((user, error) => {
+        if (user) {
+          navigate("/sales");
+        } else {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+        }
+      });
     } catch (error) {
       console.error("Error logging in with Google:", error);
     }

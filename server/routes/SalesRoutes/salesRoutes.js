@@ -1,5 +1,6 @@
 const express = require("express");
-const { requiresAuth } = require("express-openid-connect");
+const authMiddleware = require("../../middleware/authMiddleware");
+
 const {
   createSale,
   getAllSales,
@@ -7,8 +8,8 @@ const {
 
 const router = express.Router();
 
-router.post("/sales", createSale);
+router.post("/sales", authMiddleware, createSale);
 
-router.get("/sales", getAllSales);
+router.get("/sales", authMiddleware, getAllSales);
 
 module.exports = router;

@@ -1,56 +1,54 @@
-const signIn = async (req, res) => {
-  try {
-    console.log("User attempting to sign in.");
-    res.oidc.login({ returnTo: "/api/authenticated" });
-  } catch (error) {
-    console.log(error);
-  }
-};
+const User = require("../../models/User");
+const admin = require("../../config/firebase");
 
-const signUp = async (req, res) => {
-  try {
-    console.log("User attempting to sign up.");
-    res.oidc.login({ returnTo: "/api/authenticated" });
-  } catch (error) {
-    console.log(error);
-  }
-};
+const userController = {
+  register: async (req, res) => {
+    try {
+      const { authId, name, email } = req.body;
+      if (!authId || !name || !email) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
 
-const logout = async (req, res) => {
-  try {
-    if (req.session) {
-      req.session.destroy((err) => {
-        if (err) {
-          console.log("An error occurred while destroying the session");
-        } else {
-          console.log("Session destroyed");
-        }
-      });
+      const existingUser = await User.findOne({ authId });
+      if (existingUser) {
+        return res.status(400).json({ message: "User already exists" });
+      }
+
+      const newUser = new User({ authId, name, email });
+      await newUser.save();
+
+      res
+        .status(201)
+        .json({ message: "User registered successfully", user: newUser });
+    } catch (error) {
+      console.error("Error in user registration:", error);
+      res.status(500).json({ message: "Something went wrong" });
     }
-    console.log(
-      `User ${req.session.user.name} (${req.session.user.email}) is logging out.`
-    );
-    req.oidc.logout({ returnTo: "/" });
-  } catch (error) {
-    console.log(error);
-  }
+  },
+
+  login: async (req, res) => {
+    try {
+      const idToken = req.headers.authorization;
+      const decodedToken = await admin.auth().verifyIdToken(idToken);
+      const { uid, name, email } = decodedToken;
+
+      let user = await User.findOne({ authId: uid });
+      if (!user) {
+        // Register the user if they don't exist
+        user = new User({ authId: uid, name, email });
+        await user.save();
+      }
+
+      res.status(200).json({ message: "User logged in successfully", user });
+    } catch (error) {
+      console.error("Error in user login:", error);
+      res.status(500).json({ message: "Something went wrong" });
+    }
+  },
+
+  logout: (req, res) => {
+    res.status(200).json({ message: "User logged out successfully" });
+  },
 };
 
-const authenticated = async (req, res) => {
-  try {
-    /*
-    console.log(
-      `User ${req.session.user.name} (${req.session.user.email}) has logged in.`
-    ); */
-    res.redirect("/sales");
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-module.exports = {
-  signIn,
-  signUp,
-  logout,
-  authenticated,
-};
+module.exports = userController;
