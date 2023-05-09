@@ -21,11 +21,9 @@ export function Home() {
               automatizada para administrar suas vendas online.
             </p>
           </div>
-          <div className="register-btn" onClick={handleGoogleLogin}>
-            <a href="" className="anchor">
-              Iniciar Vendas
-            </a>
-          </div>
+          <button className="register-btn" onClick={handleGoogleLogin}>
+            Iniciar Vendas
+          </button>
         </div>
       </section>
     </div>
