@@ -1,10 +1,12 @@
-import { auth, googleProvider } from "../../services/firebaseConfig";
-import { signInWithPopup, getIdToken, getAuth } from "firebase/auth";
+import { createContext, useContext } from "react";
+
+import { auth, googleProvider } from "../services/firebaseConfig";
+import { signInWithPopup, signOut, getIdToken, getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-import "./style.scss";
+const AuthContext = createContext();
 
-const Login = () => {
+export default function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   const handleGoogleLogin = async () => {
@@ -44,13 +46,30 @@ const Login = () => {
     }
   };
 
-  return (
-    <div>
-      <button className="sign-up" onClick={handleGoogleLogin}>
-        Entrar
-      </button>
-    </div>
-  );
-};
+  const handleGoogleLogout = async () => {
+    try {
+      const authState = getAuth();
 
-export default Login;
+      await signOut(authState);
+
+      // Redirect user to home page after logout
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
+  return (
+    <AuthContext.Provider value={{ handleGoogleLogin, handleGoogleLogout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+
+  const { handleGoogleLogin, handleGoogleLogout } = context;
+
+  return { handleGoogleLogin, handleGoogleLogout };
+}

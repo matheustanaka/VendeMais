@@ -1,0 +1,20 @@
+.logout {
+    padding: 8px 15px;
+    color: var(--background);
+    background-color: var(--text);
+
+    font-size: 12px;
+    font-weight: 500;
+    
+    border: none;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: all 0.4s ease-in-out;
+}
+
+.logout:hover {
+    color: var(--text);
+    background-color: var(--background);
+    
+    border: 1px solid #FFFFFF;
+}

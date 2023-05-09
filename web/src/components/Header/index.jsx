@@ -1,4 +1,4 @@
-import Login from "../../components/Login";
+import Login from "../../components/LoginButton";
 import "./style.scss";
 
 export function Header() {

@@ -1,9 +1,11 @@
 import React from "react";
+import { Sidebar } from "../../components/Sidebar";
+import "./style.scss";
 
 export function Sales() {
-    return (
-        <div>
-            <h1>Sales Page</h1>
-        </div>
-    )
+  return (
+    <div>
+      <Sidebar />
+    </div>
+  );
 }
