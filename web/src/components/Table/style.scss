@@ -1,0 +1,28 @@
+.content-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .main-content {
+        flex: 1;
+        padding: 20px;
+        // height: 100%;
+
+        header {
+            margin-bottom: 20px;
+
+            h1 {
+                font-size: 2rem;
+                text-align: center;
+            }
+        }
+
+        section {
+            background-color: var(--background-light);
+            padding: 20px;
+            border-radius: 4px;
+        }
+    }
+
+}
