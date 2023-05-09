@@ -12,7 +12,7 @@ export function Sidebar() {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="wrapper">
+    <div className="navbar-info">
       <aside className="sidebar">
         <div className="logo">
           <h1>Vende+</h1>
@@ -48,14 +48,6 @@ export function Sidebar() {
           <Logout />
         </div>
       </aside>
-      <main className="main-content">
-        <header>
-          <h1>Dashboard</h1>
-        </header>
-        <section>
-          <p>Conteúdo</p>
-        </section>
-      </main>
     </div>
   );
 }
