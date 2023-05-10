@@ -33,12 +33,12 @@ export function Sidebar() {
               </a>
             </li>
             <li>
-              <a href="#">
-                <BsBoxSeam style={{ marginRight: "8px" }} /> Pedidos
+              <a href="/sales">
+                <BsBoxSeam style={{ marginRight: "8px" }} /> Vendas
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="/clients">
                 <FiUsers style={{ marginRight: "8px" }} /> Clientes
               </a>
             </li>
