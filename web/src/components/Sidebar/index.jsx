@@ -27,7 +27,7 @@ export function Sidebar() {
         <nav>
           <ul>
             <li>
-              <a href="#">
+              <a href="/products">
                 {" "}
                 <FiShoppingBag style={{ marginRight: "8px" }} /> Produtos
               </a>
