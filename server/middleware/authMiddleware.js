@@ -1,4 +1,5 @@
 const admin = require("../config/firebase");
+const UserModel = require("../models/User");
 
 module.exports = (req, res, next) => {
   const idToken = req.headers.authorization;
@@ -9,8 +10,17 @@ module.exports = (req, res, next) => {
   admin
     .auth()
     .verifyIdToken(idToken)
-    .then((decodedToken) => {
-      req.user = decodedToken;
+    .then(async (decodedToken) => {
+      // Find the user with the authId that matches the uid from the decoded token
+      const user = await UserModel.findOne({ authId: decodedToken.uid });
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      // Set req.user to the found user
+      req.user = user;
+
       next();
     })
     .catch((error) => {
