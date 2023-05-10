@@ -1,5 +1,5 @@
 import { Sidebar } from "../../components/Sidebar";
-import { Dashboard } from "../../components/Dashboard";
+import { ProductDashboard } from "../../components/ProductDashboard";
 
 import "./style.scss";
 
@@ -7,7 +7,7 @@ export function Products() {
   return (
     <div className="dashboard-content">
       <Sidebar />
-      <Dashboard />
+      <ProductDashboard />
     </div>
   );
 }
