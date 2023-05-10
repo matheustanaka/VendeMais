@@ -1,13 +1,12 @@
-import React from "react";
 import { Sidebar } from "../../components/Sidebar";
+import { Dashboard } from "../../components/Dashboard";
 import "./style.scss";
-import { Table } from "../../components/Table";
 
 export function Sales() {
   return (
     <div className="dashboard-content">
       <Sidebar />
-      <Table />
+      <Dashboard />
     </div>
   );
 }
