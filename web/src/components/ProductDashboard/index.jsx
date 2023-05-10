@@ -1,6 +1,9 @@
+import { useProductContext } from "../../hooks/useProductContext";
 import "./style.scss";
 
-export function Dashboard() {
+export function ProductDashboard() {
+  const { products } = useProductContext();
+
   return (
     <div className="content-section">
       <main className="main-content">
@@ -17,22 +20,16 @@ export function Dashboard() {
             <div className="cell">Product Name</div>
             <div className="cell">Description</div>
             <div className="cell">Price</div>
+            <div className="cell">User</div>
           </div>
-          <div className="row">
-            <div className="cell">Teclado Mecanico</div>
-            <div className="cell">RGB</div>
-            <div className="cell">$ 500</div>
-          </div>
-          <div className="row">
-            <div className="cell">Teclado Mecanico</div>
-            <div className="cell">RGB</div>
-            <div className="cell">$ 500</div>
-          </div>
-          <div className="row">
-            <div className="cell">Teclado Mecanico</div>
-            <div className="cell">RGB</div>
-            <div className="cell">$ 500</div>
-          </div>
+          {products.map((product) => (
+            <div className="row" key={product.id}>
+              <div className="cell">{product.name}</div>
+              <div className="cell">{product.description}</div>
+              <div className="cell">{product.price}</div>
+              <div className="cell">{product.user}</div>
+            </div>
+          ))}
         </div>
       </section>
     </div>
