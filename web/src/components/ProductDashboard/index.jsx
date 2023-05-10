@@ -1,8 +1,19 @@
+import { ProductModal } from "../ProductModal";
 import { useProductContext } from "../../hooks/useProductContext";
+import { useState } from "react";
 import "./style.scss";
 
 export function ProductDashboard() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const { products } = useProductContext();
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   return (
     <div className="content-section">
@@ -10,7 +21,9 @@ export function ProductDashboard() {
         <header className="header-content">
           <h1>Produtos</h1>
           <div className="btn-register-product">
-            <button className="register-product">Cadastrar Produto</button>
+            <button className="register-product" onClick={openModal}>
+              Cadastrar Produto
+            </button>
           </div>
         </header>
       </main>
@@ -32,6 +45,7 @@ export function ProductDashboard() {
           ))}
         </div>
       </section>
+      <ProductModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </div>
   );
 }
