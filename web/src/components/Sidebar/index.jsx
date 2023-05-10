@@ -12,7 +12,7 @@ export function Sidebar() {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="navbar-info">
+    <div className="wrapper">
       <aside className="sidebar">
         <div className="logo">
           <h1>Vende+</h1>
@@ -27,18 +27,18 @@ export function Sidebar() {
         <nav>
           <ul>
             <li>
-              <a href="/products">
+              <a href="#">
                 {" "}
                 <FiShoppingBag style={{ marginRight: "8px" }} /> Produtos
               </a>
             </li>
             <li>
-              <a href="/sales">
-                <BsBoxSeam style={{ marginRight: "8px" }} /> Vendas
+              <a href="#">
+                <BsBoxSeam style={{ marginRight: "8px" }} /> Pedidos
               </a>
             </li>
             <li>
-              <a href="/clients">
+              <a href="#">
                 <FiUsers style={{ marginRight: "8px" }} /> Clientes
               </a>
             </li>
@@ -48,6 +48,14 @@ export function Sidebar() {
           <Logout />
         </div>
       </aside>
+      <main className="main-content">
+        <header>
+          <h1>Dashboard</h1>
+        </header>
+        <section>
+          <p>Conteúdo</p>
+        </section>
+      </main>
     </div>
   );
 }
