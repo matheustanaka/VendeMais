@@ -16,10 +16,12 @@ const createProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
   try {
-    const products = await ProductModel.find();
+    const userId = req.user._id;
+    const products = await ProductModel.find({ user: userId });
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json({ error: "Error fetching products" });
+    console.error(error); // Log the error to your server logs
+    res.status(500).json({ error: error.message }); // Send the error message in the HTTP response
   }
 };
 

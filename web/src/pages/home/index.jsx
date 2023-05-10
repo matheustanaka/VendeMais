@@ -1,7 +1,11 @@
 import { Header } from "../../components/Header";
+
+import { useAuth } from "../../hooks/useAuth";
+
 import "./style.scss";
 
 export function Home() {
+  const { handleGoogleLogin } = useAuth();
   return (
     <div>
       <Header />
@@ -17,11 +21,9 @@ export function Home() {
               automatizada para administrar suas vendas online.
             </p>
           </div>
-          <div className="register-btn">
-            <a href="" className="anchor">
-              Iniciar Vendas
-            </a>
-          </div>
+          <button className="register-btn" onClick={handleGoogleLogin}>
+            Iniciar Vendas
+          </button>
         </div>
       </section>
     </div>
