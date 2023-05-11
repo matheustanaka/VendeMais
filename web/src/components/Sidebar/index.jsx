@@ -18,7 +18,11 @@ export function Sidebar() {
           <h1>Vende+</h1>
         </div>
         <div className="user-info">
-          <img src={user?.photoURL} alt="" />
+          <img
+            src={user?.photoURL}
+            alt="user photo"
+            referrerPolicy="no-referrer"
+          />
           <div className="user-content">
             <h2>{user?.displayName}</h2>
             <p>{user?.email}</p>
