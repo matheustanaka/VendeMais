@@ -5,6 +5,10 @@ const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+
   const auth = getAuth();
 
   const fetchProducts = async () => {
@@ -33,6 +37,33 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const addProduct = async () => {
+    try {
+      const idToken = await getIdToken(auth.currentUser);
+
+      console.log(idToken);
+
+      const response = await fetch("http://localhost:3000/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: idToken,
+        },
+        body: JSON.stringify({
+          name: name,
+          description: description,
+          price: price,
+        }),
+      });
+
+      console.log(response);
+
+      fetchProducts();
+    } catch (error) {
+      console.error("Error sending products:", error);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -43,7 +74,20 @@ export const ProductProvider = ({ children }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, setProducts, fetchProducts }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        setProducts,
+        fetchProducts,
+        name,
+        setName,
+        price,
+        setPrice,
+        description,
+        setDescription,
+        addProduct,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );
