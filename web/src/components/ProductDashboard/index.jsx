@@ -30,17 +30,15 @@ export function ProductDashboard() {
       <section className="table-section">
         <div className="table">
           <div className="row header">
-            <div className="cell">Product Name</div>
-            <div className="cell">Description</div>
-            <div className="cell">Price</div>
-            <div className="cell">User</div>
+            <div className="cell">Nome do Produto</div>
+            <div className="cell">Descrição</div>
+            <div className="cell">Preço</div>
           </div>
           {products.map((product) => (
             <div className="row" key={product.id}>
               <div className="cell">{product.name}</div>
               <div className="cell">{product.description}</div>
               <div className="cell">{product.price}</div>
-              <div className="cell">{product.user}</div>
             </div>
           ))}
         </div>
