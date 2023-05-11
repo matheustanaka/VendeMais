@@ -1,20 +1,43 @@
-import { useState } from "react";
 import Modal from "react-modal";
+import { useProductContext } from "../../hooks/useProductContext";
 import "./style.scss";
 
 Modal.setAppElement("#root"); // This line is important for accessibility and must point to your app root.
 
 export function ProductModal({ modalIsOpen, closeModal }) {
-  //   const [name, setName] = useState("");
-  //   const [description, setDescription] = useState("");
-  //   const [price, setPrice] = useState("");
+  const {
+    name,
+    setName,
+    price,
+    setPrice,
+    description,
+    setDescription,
+    addProduct,
+  } = useProductContext();
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleChangeDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleChangePrice = (e) => {
+    setPrice(e.target.value);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here, you would typically send the form data to your server
-    console.log({ name, description, price: Number(price) });
+    addProduct();
+
+    setName("");
+    setDescription("");
+    setPrice("");
+
     closeModal();
   };
+
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -39,11 +62,29 @@ export function ProductModal({ modalIsOpen, closeModal }) {
           <div className="content-product-modal">
             <form className="form" onSubmit={handleSubmit}>
               <label className="label-product">Título do Produto</label>
-              <input className="input" type="text" name="title" />
+              <input
+                className="input"
+                type="text"
+                name="title"
+                value={name}
+                onChange={handleChangeName}
+              />
               <label className="label-product">Descricão do Produto</label>
-              <input className="input" type="text" name="title" />
+              <input
+                className="input"
+                type="text"
+                name="title"
+                value={description}
+                onChange={handleChangeDescription}
+              />
               <label className="label-product">Preço</label>
-              <input className="input" type="text" name="price" />
+              <input
+                className="input"
+                type="text"
+                name="price"
+                value={price}
+                onChange={handleChangePrice}
+              />
               <button className="btn-modal" type="submit">
                 Cadastrar Produto
               </button>
