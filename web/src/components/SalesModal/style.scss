@@ -71,11 +71,6 @@
         flex-direction: column;
         align-items: flex-start;
 
-        .label-product {
-            margin-top: 10px;
-            font-weight: 500;
-        }
-
         .input {
             width: 100%;
             padding: 15px;
@@ -94,34 +89,65 @@
             border: 1px solid hsla(0, 0%, 100%, 0.096);
         }
 
-        select.my-select {
-            appearance: none;
-            width: 100%;
-            padding: 15px;
-            margin-top: 10px;
-
-            border-radius: 8px;
-            border: none;
-            background: var(--background-light);
-            color: var(--text);
-
+        label.label-product {
+            padding-top: 20px;
             font-weight: 500;
-            font-size: 18px;
-
-            outline: none;
-
-            border: 1px solid hsla(0, 0%, 100%, 0.096);
         }
 
-        #my-select::-ms-expand {
-            display: none;
-        }
+        .product-area {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
 
-        select.my-select option {
-            background: var(--background-light);
-            color: black;
-        }
+            width: 100%;
 
+            .btn-add {
+                margin-top: 10px;
+                padding: 10px 15px;
+                align-items: center;
+
+                border-radius: 8px;
+
+                background-color: var(--primary);
+                font-weight: 700;
+                color: var(--text);
+
+                cursor: pointer;
+                transition: all 0.4s ease-in-out;
+            }
+
+            .btn-add:hover {
+                background-color: var(--secondary);
+            }
+
+            select.my-select {
+                appearance: none;
+                width: 100%;
+                padding: 15px;
+                margin-top: 10px;
+
+                border-radius: 8px;
+                border: none;
+                background: var(--background-light);
+                color: var(--text);
+
+                font-weight: 500;
+                font-size: 18px;
+
+                outline: none;
+
+                border: 1px solid hsla(0, 0%, 100%, 0.096);
+            }
+
+            #my-select::-ms-expand {
+                display: none;
+            }
+
+            select.my-select option {
+                background: var(--background-light);
+                color: black;
+            }
+        }
 
         .btn-modal {
             padding: 10px 10px;
