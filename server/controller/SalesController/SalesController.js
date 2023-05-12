@@ -3,6 +3,7 @@ const Product = require("../../models/Product");
 
 const createSale = async (req, res) => {
   try {
+    const userId = req.user._id;
     const { customer, items, user } = req.body;
 
     // Validate the items and get product details
@@ -28,7 +29,7 @@ const createSale = async (req, res) => {
         quantity: item.quantity,
       })),
       totalAmount,
-      user,
+      user: userId,
     });
 
     await newSale.save();
@@ -41,7 +42,8 @@ const createSale = async (req, res) => {
 
 const getAllSales = async (req, res) => {
   try {
-    const sales = await Sale.find().populate("items.product");
+    const userId = req.user._id;
+    const sales = await Sale.find({ user: userId }).populate("items.product");
     res.status(200).json(sales);
   } catch (error) {
     res.status(500).json({ error: "Could not fetch sales" });

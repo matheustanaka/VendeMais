@@ -1,0 +1,174 @@
+/* Modal */
+.overlay {
+    background: rgba(0, 0, 0, 0.651);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalContainer {
+    display: flex;
+    flex-direction: column;
+
+    width: 40%;
+
+    padding: 15px;
+
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    background: var(--background);
+    box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 8px;
+}
+
+.header-modal {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 5px;
+
+    .title-modal {
+        font-size: 25px;
+        padding: 5px;
+        font-weight: 700;
+    }
+
+    .closeBtn {
+        margin-left: auto;
+        margin-bottom: 10px;
+        padding: 10px;
+
+        border-radius: 8px;
+
+        background-color: rgb(225, 55, 55);
+        font-weight: 700;
+        color: var(--text);
+
+        font-size: 12px;
+
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+    }
+
+    .closeBtn:hover {
+        background-color: rgb(109, 0, 0);
+    }
+}
+
+.content-product-modal {
+    padding: 8px;
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .input {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+
+            border-radius: 8px;
+            border: none;
+            background: var(--background-light);
+            color: var(--text);
+
+            font-weight: 500;
+            font-size: 18px;
+
+            outline: none;
+
+            border: 1px solid hsla(0, 0%, 100%, 0.096);
+        }
+
+        label.label-product {
+            padding-top: 20px;
+            font-weight: 500;
+        }
+
+        .product-area {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+
+            width: 100%;
+
+            .btn-add {
+                margin-top: 10px;
+                padding: 10px 15px;
+                align-items: center;
+
+                border-radius: 8px;
+
+                background-color: var(--primary);
+                font-weight: 700;
+                color: var(--text);
+
+                cursor: pointer;
+                transition: all 0.4s ease-in-out;
+            }
+
+            .btn-add:hover {
+                background-color: var(--secondary);
+            }
+
+            select.my-select {
+                appearance: none;
+                width: 100%;
+                padding: 15px;
+                margin-top: 10px;
+
+                border-radius: 8px;
+                border: none;
+                background: var(--background-light);
+                color: var(--text);
+
+                font-weight: 500;
+                font-size: 18px;
+
+                outline: none;
+
+                border: 1px solid hsla(0, 0%, 100%, 0.096);
+            }
+
+            #my-select::-ms-expand {
+                display: none;
+            }
+
+            select.my-select option {
+                background: var(--background-light);
+                color: black;
+            }
+        }
+
+        .btn-modal {
+            padding: 10px 10px;
+
+            margin: 15px auto 0px;
+
+            border: 1px solid hsla(0, 0%, 100%, 0.096);
+            border-radius: 8px;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            background-color: var(--primary);
+            color: var(--text);
+
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .btn-modal:hover {
+            background-color: var(--secondary);
+        }
+    }
+}

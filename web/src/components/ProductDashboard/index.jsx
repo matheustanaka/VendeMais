@@ -35,7 +35,7 @@ export function ProductDashboard() {
             <div className="cell">Preço</div>
           </div>
           {products.map((product) => (
-            <div className="row" key={product.id}>
+            <div className="row" key={product._id}>
               <div className="cell">{product.name}</div>
               <div className="cell">{product.description}</div>
               <div className="cell">{product.price}</div>

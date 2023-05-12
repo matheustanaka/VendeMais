@@ -3,6 +3,7 @@ import { getAuth, getIdToken, onAuthStateChanged } from "firebase/auth";
 
 const ProductContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
@@ -29,7 +30,7 @@ export const ProductProvider = ({ children }) => {
       }
 
       const products = await response.json();
-      console.log("Server response:", products);
+      // console.log("Server response:", products);
 
       return setProducts(products);
     } catch (error) {
@@ -41,7 +42,7 @@ export const ProductProvider = ({ children }) => {
     try {
       const idToken = await getIdToken(auth.currentUser);
 
-      console.log(idToken);
+      // console.log(idToken);
 
       const response = await fetch("http://localhost:3000/products", {
         method: "POST",
