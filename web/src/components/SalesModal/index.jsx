@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import { AiOutlinePlus } from "react-icons/ai";
 import { useSalesContext } from "../../hooks/useSalesContext";
 import { useProductContext } from "../../hooks/useProductContext";
 import "./style.scss";
@@ -67,14 +68,19 @@ export function SalesModal({ modalIsOpen, closeModal }) {
                 onChange={handleChangeCustomer}
               />
               <label className="label-product">Nome do Produto</label>
-              <select onChange={handleChangeProduct} className="my-select">
-                <option value="">Selecione um Produto</option>
-                {products.map((product) => (
-                  <option key={product._id} value={product._id}>
-                    {product.name}
-                  </option>
-                ))}
-              </select>
+              <div className="product-area">
+                <select onChange={handleChangeProduct} className="my-select">
+                  <option value="">Selecione um Produto</option>
+                  {products.map((product) => (
+                    <option key={product._id} value={product._id}>
+                      {product.name}
+                    </option>
+                  ))}
+                </select>
+                <button type="button" className="btn-add">
+                  <AiOutlinePlus size={18} color="white" />
+                </button>
+              </div>
               <label className="label-product">Quantidade</label>
               <input
                 className="input quantity"
