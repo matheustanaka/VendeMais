@@ -5,10 +5,10 @@ const SalesContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const SalesProvider = ({ children }) => {
-  const [costumer, setCostumer] = useState("");
+  const [customer, setCustomer] = useState("");
+  const [product, setProduct] = useState("");
   const [totalAmount, setTotalAmount] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [date, setDate] = useState("");
   const [sales, setSales] = useState([]);
 
   const auth = getAuth();
@@ -38,6 +38,39 @@ export const SalesProvider = ({ children }) => {
     }
   };
 
+  const addSale = async () => {
+    try {
+      const idToken = await getIdToken(auth.currentUser);
+
+      const response = await fetch("http://localhost:3000/sales", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: idToken,
+        },
+        body: JSON.stringify({
+          customer: customer,
+          items: [
+            {
+              product: product,
+              quantity: quantity,
+            },
+          ],
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        const data = await response.json();
+        console.log(data);
+        fetchSales();
+      }
+    } catch (error) {
+      console.error("There was an error!", error);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -53,14 +86,15 @@ export const SalesProvider = ({ children }) => {
         sales,
         setSales,
         fetchSales,
-        costumer,
-        setCostumer,
+        customer,
+        setCustomer,
+        product,
+        setProduct,
         totalAmount,
         setTotalAmount,
         quantity,
         setQuantity,
-        date,
-        setDate,
+        addSale,
       }}
     >
       {children}
