@@ -1,13 +1,27 @@
+import { SalesModal } from "../SalesModal";
 import { useSalesContext } from "../../hooks/useSalesContext";
+import { useState } from "react";
 import "./style.scss";
 
 export function SalesDashboard() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const { sales } = useSalesContext();
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <div className="main-dashboard">
       <header className="header-sales">
         <h1>Vendas</h1>
-        <button className="register-sales">Cadastrar Venda</button>
+        <button className="register-sales" onClick={openModal}>
+          Cadastrar Venda
+        </button>
       </header>
       <div className="card-sales">
         <div className="card">
@@ -58,6 +72,7 @@ export function SalesDashboard() {
           })}
         </div>
       </section>
+      <SalesModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </div>
   );
 }
