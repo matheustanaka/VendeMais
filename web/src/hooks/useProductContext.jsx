@@ -42,7 +42,7 @@ export const ProductProvider = ({ children }) => {
     try {
       const idToken = await getIdToken(auth.currentUser);
 
-      console.log(idToken);
+      // console.log(idToken);
 
       const response = await fetch("http://localhost:3000/products", {
         method: "POST",
