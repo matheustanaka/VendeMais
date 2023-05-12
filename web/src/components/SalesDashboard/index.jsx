@@ -1,6 +1,8 @@
+import { useSalesContext } from "../../hooks/useSalesContext";
 import "./style.scss";
 
 export function SalesDashboard() {
+  const { sales } = useSalesContext();
   return (
     <div className="main-dashboard">
       <header className="header-sales">
@@ -29,12 +31,31 @@ export function SalesDashboard() {
             <div className="cell">Quantidade de Produtos</div>
             <div className="cell">Data da compra</div>
           </div>
-          <div className="row">
-            <div className="cell">oi</div>
-            <div className="cell">oi</div>
-            <div className="cell">oi</div>
-            <div className="cell">oi</div>
-          </div>
+          {sales.map((sale) => {
+            const totalQuantity = sale.items.reduce(
+              (total, item) => total + item.quantity,
+              0
+            );
+
+            // Format Date
+            const date = new Date(sale.createdAt);
+            const formattedDate = `${String(date.getDate()).padStart(
+              2,
+              "0"
+            )}/${String(date.getMonth() + 1).padStart(
+              2,
+              "0"
+            )}/${date.getFullYear()}`;
+
+            return (
+              <div className="row" key={sale._id}>
+                <div className="cell">{sale.customer}</div>
+                <div className="cell">{sale.totalAmount}</div>
+                <div className="cell">{totalQuantity}</div>
+                <div className="cell">{formattedDate}</div>
+              </div>
+            );
+          })}
         </div>
       </section>
     </div>
