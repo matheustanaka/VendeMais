@@ -1,11 +1,21 @@
 import { SalesModal } from "../SalesModal";
 import { useSalesContext } from "../../hooks/useSalesContext";
+import { useProductContext } from "../../hooks/useProductContext";
 import { useState } from "react";
 import "./style.scss";
 
 export function SalesDashboard() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { sales } = useSalesContext();
+  const { products } = useProductContext();
+
+  const currentBalance = sales.reduce(
+    (total, item) => total + item.totalAmount,
+    0
+  );
+
+  const items = sales.flatMap((sale) => sale.items);
+  const productsSold = items.reduce((total, i) => total + i.quantity, 0);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -26,11 +36,11 @@ export function SalesDashboard() {
       <div className="card-sales">
         <div className="card">
           <h2>Saldo Atual</h2>
-          <p>Resultado</p>
+          <p>R$ {currentBalance}</p>
         </div>
         <div className="card">
-          <h2>Total de Vendas</h2>
-          <p>Resultado</p>
+          <h2>Total Produtos Vendidos</h2>
+          <p>{productsSold} produtos</p>
         </div>
         <div className="card">
           <h2>Última Venda</h2>
