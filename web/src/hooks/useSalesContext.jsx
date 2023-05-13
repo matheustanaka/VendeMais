@@ -10,6 +10,7 @@ export const SalesProvider = ({ children }) => {
   const [totalAmount, setTotalAmount] = useState("");
   const [quantity, setQuantity] = useState("");
   const [sales, setSales] = useState([]);
+  const [items, setItems] = useState([]);
 
   const auth = getAuth();
 
@@ -38,6 +39,11 @@ export const SalesProvider = ({ children }) => {
     }
   };
 
+  const addItem = (product, quantity) => {
+    // Function to add an item to the items array
+    setItems([...items, { product, quantity }]);
+  };
+
   const addSale = async () => {
     try {
       const idToken = await getIdToken(auth.currentUser);
@@ -50,12 +56,7 @@ export const SalesProvider = ({ children }) => {
         },
         body: JSON.stringify({
           customer: customer,
-          items: [
-            {
-              product: product,
-              quantity: quantity,
-            },
-          ],
+          items: items,
         }),
       });
 
@@ -95,6 +96,9 @@ export const SalesProvider = ({ children }) => {
         quantity,
         setQuantity,
         addSale,
+        items,
+        setItems,
+        addItem,
       }}
     >
       {children}
