@@ -13,25 +13,29 @@ export function SalesDashboard() {
   if (loading) {
     return <div>Loading...</div>;
   }
+  const currentBalance =
+    sales && sales.length > 0
+      ? sales.reduce((total, item) => total + item.totalAmount, 0)
+      : "0";
 
-  const currentBalance = sales.reduce(
-    (total, item) => total + item.totalAmount,
-    0
-  );
+  const items =
+    sales && sales.length > 0 ? sales.flatMap((sale) => sale.items) : [];
 
-  // transform items in array
-  const items = sales.flatMap((sale) => sale.items);
-  const productsSold = items.reduce((total, i) => total + i.quantity, 0);
+  const productsSold =
+    items && items.length > 0
+      ? items.reduce((total, i) => total + i.quantity, 0)
+      : "0";
 
-  const lastSale = sales[sales.length - 1];
-  const dateLastSale = new Date(lastSale.createdAt);
-  const FormattedDateLastSale = `${String(dateLastSale.getDate()).padStart(
-    2,
-    "0"
-  )}/${String(dateLastSale.getMonth() + 1).padStart(
-    2,
-    "0"
-  )}/${dateLastSale.getFullYear()}`;
+  const lastSale = sales && sales.length > 0 ? sales[sales.length - 1] : null;
+
+  const dateLastSale = lastSale ? new Date(lastSale.createdAt) : "N/A";
+
+  const FormattedDateLastSale =
+    dateLastSale !== "N/A"
+      ? `${String(dateLastSale.getDate()).padStart(2, "0")}/${String(
+          dateLastSale.getMonth() + 1
+        ).padStart(2, "0")}/${dateLastSale.getFullYear()}`
+      : "N/A";
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -72,7 +76,7 @@ export function SalesDashboard() {
         <div className="card">
           <h1>Última Venda</h1>
           <h4>
-            {lastSale.customer}, {FormattedDateLastSale}
+            {lastSale ? `${lastSale.customer}, ${FormattedDateLastSale}` : ""}
           </h4>
         </div>
       </div>
