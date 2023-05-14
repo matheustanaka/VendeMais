@@ -29,6 +29,7 @@ export function DetailModal({
   let products = sale.items.map((item) => ({
     name: item.product.name,
     price: item.product.price,
+    quantity: item.quantity,
   }));
 
   return (
@@ -72,11 +73,13 @@ export function DetailModal({
                 <div className="row-sale header-sale">
                   <div className="cell-sale">Nome do Produto</div>
                   <div className="cell-sale">Preço</div>
+                  <div className="cell-sale">Quantidade</div>
                 </div>
                 {products.map((product, index) => (
                   <div className="row-sale" key={index}>
                     <div className="cell-sale">{product.name}</div>
                     <div className="cell-sale">R$ {product.price}</div>
+                    <div className="cell-sale">{product.quantity}</div>
                   </div>
                 ))}
               </div>

@@ -41,10 +41,13 @@ export function SalesModal({ modalIsOpen, closeModal }) {
     setItems([...items, { product: "", quantity: "" }]);
   };
 
-  const handleRemoveItem = (index) => () => {
-    const newItems = [...items];
-    newItems.splice(index, 1);
-    setItems(newItems);
+  const handleRemoveItem = () => {
+    if (items.length > 1) {
+      // Prevent removing the last item
+      const newItems = [...items];
+      newItems.pop(); // Remove the last item
+      setItems(newItems);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -63,15 +66,15 @@ export function SalesModal({ modalIsOpen, closeModal }) {
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
-      contentLabel="Product Modal"
-      className="product-modal"
+      contentLabel="Sales Modal"
+      className="sales-modal"
     >
       <div onClick={closeModal} className="overlay">
         <div
           onClick={(e) => {
             e.stopPropagation();
           }}
-          className="modalContainer"
+          className="sales-modalContainer"
         >
           <div className="header-modal">
             <h1 className="title-modal">Criar Venda</h1>
@@ -82,7 +85,7 @@ export function SalesModal({ modalIsOpen, closeModal }) {
 
           <div className="content-product-modal">
             <form className="form" onSubmit={handleSubmit}>
-              <label className="label-product">Nome do Cliente</label>
+              <label className="label-sale">Nome do Cliente</label>
               <input
                 className="input"
                 type="text"
@@ -91,8 +94,8 @@ export function SalesModal({ modalIsOpen, closeModal }) {
                 onChange={handleChangeCustomer}
               />
               {items.map((item, index) => (
-                <div key={index}>
-                  <label className="label-product">Nome do Produto</label>
+                <div key={index} className="parent-product">
+                  <label className="label-sale">Nome do Produto</label>
                   <div className="product-area">
                     <select
                       onChange={handleChangeItemProduct(index)}
@@ -105,15 +108,8 @@ export function SalesModal({ modalIsOpen, closeModal }) {
                         </option>
                       ))}
                     </select>
-                    <button
-                      type="button"
-                      className="btn-add"
-                      onClick={handleRemoveItem(index)}
-                    >
-                      <AiOutlineMinus size={18} color="white" />
-                    </button>
                   </div>
-                  <label className="label-product">Quantidade</label>
+                  <label className="label-sale">Quantidade</label>
                   <input
                     className="input quantity"
                     type="number"
@@ -122,14 +118,25 @@ export function SalesModal({ modalIsOpen, closeModal }) {
                   />
                 </div>
               ))}
-              <button
-                className="btn-modal icon"
-                type="button"
-                onClick={handleAddItem}
-              >
-                <AiOutlinePlus size={28} color="white" />
-              </button>
-              <button className="btn-modal" type="submit">
+              <div className="buttons-space">
+                <button
+                  className="btn-add"
+                  type="button"
+                  onClick={handleAddItem}
+                >
+                  {/* <AiOutlinePlus size={20} color="white" /> */}
+                  Adicionar Produto
+                </button>
+                <button
+                  type="button"
+                  className="btn-remove"
+                  onClick={handleRemoveItem}
+                >
+                  {/* <AiOutlineMinus size={20} color="white" /> */}
+                  Remover Produto
+                </button>
+              </div>
+              <button className="btn-sale" type="submit">
                 Registrar Venda
               </button>
             </form>
