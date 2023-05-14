@@ -65,6 +65,31 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const deleteProduct = async (productId) => {
+    try {
+      const idToken = await getIdToken(auth.currentUser);
+
+      const response = await fetch(
+        `http://localhost:3000/products/${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: idToken,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Server responded with an error");
+      }
+
+      fetchProducts();
+    } catch (error) {
+      console.error("Error Deleting product:", error);
+    }
+  };
+
   const editProduct = async (productId, updatedProduct) => {
     try {
       const idToken = await getIdToken(auth.currentUser);
@@ -140,6 +165,7 @@ export const ProductProvider = ({ children }) => {
         addProduct,
         editProduct,
         fetchProductById,
+        deleteProduct,
       }}
     >
       {children}

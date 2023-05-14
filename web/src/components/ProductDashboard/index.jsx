@@ -11,8 +11,14 @@ export function ProductDashboard() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [currentProductId, setCurrentProductId] = useState(null);
-  const { products, fetchProductById, setName, setDescription, setPrice } =
-    useProductContext();
+  const {
+    products,
+    fetchProductById,
+    setName,
+    setDescription,
+    setPrice,
+    deleteProduct,
+  } = useProductContext();
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -39,6 +45,10 @@ export function ProductDashboard() {
     setEditModalIsOpen(false);
   };
 
+  const handleDeleteProduct = (productId) => async () => {
+    deleteProduct(productId);
+  };
+
   // Dropdown
   const menu = (id) => (
     <Menu style={{ background: "var(--background)" }}>
@@ -61,7 +71,7 @@ export function ProductDashboard() {
             border: "none",
             background: "var(--background)",
           }}
-          onClick={closeModal}
+          onClick={handleDeleteProduct(id)}
         >
           Deletar
         </button>
