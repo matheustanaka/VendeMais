@@ -53,7 +53,7 @@ const getAllSales = async (req, res) => {
 const getSaleById = async (req, res) => {
   try {
     const userId = req.user._id;
-    const saleId = req.params.id; // Assuming the sale id is passed as a URL parameter
+    const saleId = req.params.id;
     const sale = await Sale.findOne({ _id: saleId, user: userId }).populate(
       "items.product"
     );
