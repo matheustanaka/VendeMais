@@ -1,11 +1,13 @@
 import { SalesModal } from "../SalesModal";
+import { DetailModal } from "../DetailModal";
 import { useSalesContext } from "../../hooks/useSalesContext";
 import { useState } from "react";
 import "./style.scss";
 
 export function SalesDashboard() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { sales, loading } = useSalesContext();
+  const [detailModalIsOpen, setDetailModalIsOpen] = useState(false);
+  const { sales, loading, fetchSaleById, saleById } = useSalesContext();
 
   // wait sales data load
   if (loading) {
@@ -35,8 +37,17 @@ export function SalesDashboard() {
     setModalIsOpen(true);
   };
 
+  const openDetailModal = () => {
+    setDetailModalIsOpen(true);
+  };
+
   const closeModal = () => {
     setModalIsOpen(false);
+    setDetailModalIsOpen(false);
+  };
+
+  const closeDetailModal = () => {
+    setDetailModalIsOpen(false);
   };
 
   return (
@@ -97,7 +108,15 @@ export function SalesDashboard() {
                 <div className="cell">{totalQuantity} produtos comprados</div>
                 <div className="cell">{formattedDate}</div>
                 <div className="cell">
-                  <button className="details">Detalhes</button>
+                  <button
+                    className="details"
+                    onClick={() => {
+                      fetchSaleById(sale._id);
+                      openDetailModal();
+                    }}
+                  >
+                    Detalhes
+                  </button>
                 </div>
               </div>
             );
@@ -105,6 +124,12 @@ export function SalesDashboard() {
         </div>
       </section>
       <SalesModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
+      <DetailModal
+        DetailModalIsOpen={detailModalIsOpen}
+        closeDetailModal={closeDetailModal}
+        sale={saleById}
+        loading={loading}
+      />
     </div>
   );
 }
