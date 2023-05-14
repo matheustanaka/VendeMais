@@ -12,13 +12,15 @@ export function Home() {
       <section className="wrapper">
         <div className="content">
           <h1 className="title">
-            Suas vendas,
-            <br /> simplificadas.
+            Suas <span className="span-title">Vendas</span>
+            <br /> Simplificadas.
           </h1>
           <div className="description">
             <p className="paragraph-content">
-              Traga sua loja para Vende+, uma plataforma <br /> totalmente
-              automatizada para administrar suas vendas online.
+              Traga sua loja para Vende+, uma plataforma <br /> totalmente{" "}
+              <span className="span-paragraph">automatizada</span> para
+              administrar suas{" "}
+              <span className="span-paragraph">vendas online.</span>
             </p>
           </div>
           <button className="register-btn" onClick={handleGoogleLogin}>
