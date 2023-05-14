@@ -26,6 +26,21 @@ const getAllProduct = async (req, res) => {
   }
 };
 
+const getProductbyId = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const productId = req.params.id;
+    const products = await ProductModel.findOne({
+      _id: productId,
+      user: userId,
+    });
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error); // Log the error to your server logs
+    res.status(500).json({ error: error.message }); // Send the error message in the HTTP response
+  }
+};
+
 const updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
@@ -68,6 +83,7 @@ const deleteProduct = async (req, res) => {
 module.exports = {
   createProduct,
   getAllProduct,
+  getProductbyId,
   updateProduct,
   deleteProduct,
 };
