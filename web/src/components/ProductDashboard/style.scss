@@ -95,5 +95,17 @@
             flex-basis: 0;
             flex-grow: 1;
         }
+
+        .dropdownButton {
+            color: var(--text);
+            background-color: var(--background-light);
+            border: none;
+            // border: 1px solid hsla(0, 0%, 100%, 0.096);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .dropdownButton:hover {
+            background-color: var(--background);
+        }
     }
 }
