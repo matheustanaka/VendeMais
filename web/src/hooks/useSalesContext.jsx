@@ -11,6 +11,7 @@ export const SalesProvider = ({ children }) => {
   const [quantity, setQuantity] = useState("");
   const [sales, setSales] = useState([]);
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const auth = getAuth();
 
@@ -33,9 +34,11 @@ export const SalesProvider = ({ children }) => {
       const sales = await response.json();
       console.log("Server response:", sales);
 
-      return setSales(sales);
+      setSales(sales);
+      setLoading(false);
     } catch (error) {
       console.log("Error fetching sales:", error);
+      setLoading(false);
     }
   };
 
@@ -99,6 +102,8 @@ export const SalesProvider = ({ children }) => {
         items,
         setItems,
         addItem,
+        loading,
+        setLoading,
       }}
     >
       {children}

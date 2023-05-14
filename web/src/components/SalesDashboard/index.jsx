@@ -1,21 +1,35 @@
 import { SalesModal } from "../SalesModal";
 import { useSalesContext } from "../../hooks/useSalesContext";
-import { useProductContext } from "../../hooks/useProductContext";
 import { useState } from "react";
 import "./style.scss";
 
 export function SalesDashboard() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { sales } = useSalesContext();
-  const { products } = useProductContext();
+  const { sales, loading } = useSalesContext();
+
+  // wait sales data load
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const currentBalance = sales.reduce(
     (total, item) => total + item.totalAmount,
     0
   );
 
+  // transform items in array
   const items = sales.flatMap((sale) => sale.items);
   const productsSold = items.reduce((total, i) => total + i.quantity, 0);
+
+  const lastSale = sales[sales.length - 1];
+  const dateLastSale = new Date(lastSale.createdAt);
+  const FormattedDateLastSale = `${String(dateLastSale.getDate()).padStart(
+    2,
+    "0"
+  )}/${String(dateLastSale.getMonth() + 1).padStart(
+    2,
+    "0"
+  )}/${dateLastSale.getFullYear()}`;
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -35,16 +49,20 @@ export function SalesDashboard() {
       </header>
       <div className="card-sales">
         <div className="card">
-          <h2>Saldo Atual</h2>
-          <p>R$ {currentBalance}</p>
+          <h1>Saldo Atual</h1>
+          <h4>
+            R$ <span>{currentBalance}</span>
+          </h4>
         </div>
         <div className="card">
-          <h2>Total Produtos Vendidos</h2>
-          <p>{productsSold} produtos</p>
+          <h1>Total Produtos Vendidos</h1>
+          <h4>{productsSold} produtos vendidos</h4>
         </div>
         <div className="card">
-          <h2>Última Venda</h2>
-          <p>Resultado</p>
+          <h1>Última Venda</h1>
+          <h4>
+            {lastSale.customer}, {FormattedDateLastSale}
+          </h4>
         </div>
       </div>
       <section className="table-section">
@@ -54,6 +72,7 @@ export function SalesDashboard() {
             <div className="cell">Valor Total da Venda</div>
             <div className="cell">Quantidade de Produtos</div>
             <div className="cell">Data da compra</div>
+            <div className="cell">Detalhes da venda</div>
           </div>
           {sales.map((sale) => {
             const totalQuantity = sale.items.reduce(
@@ -74,9 +93,12 @@ export function SalesDashboard() {
             return (
               <div className="row" key={sale._id}>
                 <div className="cell">{sale.customer}</div>
-                <div className="cell">{sale.totalAmount}</div>
-                <div className="cell">{totalQuantity}</div>
+                <div className="cell">R$ {sale.totalAmount}</div>
+                <div className="cell">{totalQuantity} produtos comprados</div>
                 <div className="cell">{formattedDate}</div>
+                <div className="cell">
+                  <button className="details">Detalhes</button>
+                </div>
               </div>
             );
           })}
