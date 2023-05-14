@@ -10,7 +10,9 @@ export const SalesProvider = ({ children }) => {
   const [totalAmount, setTotalAmount] = useState("");
   const [quantity, setQuantity] = useState("");
   const [sales, setSales] = useState([]);
+  const [saleById, setSaleById] = useState(null);
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const auth = getAuth();
 
@@ -33,9 +35,38 @@ export const SalesProvider = ({ children }) => {
       const sales = await response.json();
       console.log("Server response:", sales);
 
-      return setSales(sales);
+      setSales(sales);
+      setLoading(false);
     } catch (error) {
       console.log("Error fetching sales:", error);
+      setLoading(false);
+    }
+  };
+
+  const fetchSaleById = async (saleId) => {
+    try {
+      const idToken = await getIdToken(auth.currentUser);
+      console.log(idToken);
+
+      const response = await fetch(`http://localhost:3000/sales/${saleId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: idToken,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Server responded with an error");
+      }
+
+      const sale = await response.json();
+      console.log("Server response:", sale);
+
+      setSaleById(sale); // use setSaleById here
+      setLoading(false);
+    } catch (error) {
+      console.log("Error fetching sale:", error);
+      setLoading(false);
     }
   };
 
@@ -99,6 +130,11 @@ export const SalesProvider = ({ children }) => {
         items,
         setItems,
         addItem,
+        loading,
+        setLoading,
+        saleById,
+        setSaleById,
+        fetchSaleById,
       }}
     >
       {children}

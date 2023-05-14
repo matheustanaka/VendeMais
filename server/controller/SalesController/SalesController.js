@@ -50,7 +50,25 @@ const getAllSales = async (req, res) => {
   }
 };
 
+const getSaleById = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const saleId = req.params.id; // Assuming the sale id is passed as a URL parameter
+    const sale = await Sale.findOne({ _id: saleId, user: userId }).populate(
+      "items.product"
+    );
+    if (sale) {
+      res.status(200).json(sale);
+    } else {
+      res.status(404).json({ error: "Sale not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Could not fetch sale" });
+  }
+};
+
 module.exports = {
   createSale,
   getAllSales,
+  getSaleById,
 };
