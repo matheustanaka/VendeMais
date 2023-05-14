@@ -1,3 +1,5 @@
+import { Menu, Dropdown, Button } from "antd";
+import { EllipsisOutlined } from "@ant-design/icons";
 import { SalesModal } from "../SalesModal";
 import { DetailModal } from "../DetailModal";
 import { useSalesContext } from "../../hooks/useSalesContext";
@@ -8,6 +10,38 @@ export function SalesDashboard() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [detailModalIsOpen, setDetailModalIsOpen] = useState(false);
   const { sales, loading, fetchSaleById, saleById } = useSalesContext();
+
+  const menu = (saleById) => (
+    <Menu style={{ background: "var(--background)" }}>
+      <Menu.Item className="dropdownItem" key="0">
+        <button
+          style={{
+            color: "white",
+            border: "none",
+            background: "var(--background)",
+          }}
+          onClick={() => {
+            fetchSaleById(saleById);
+            openDetailModal();
+          }}
+        >
+          Detalhes
+        </button>
+      </Menu.Item>
+      {/* <Menu.Item className="dropdownItem" key="1">
+        <button
+          style={{
+            color: "white",
+            border: "none",
+            background: "var(--background)",
+          }}
+          onClick={handleDeleteProduct(id)}
+        >
+          Deletar
+        </button>
+      </Menu.Item> */}
+    </Menu>
+  );
 
   // wait sales data load
   if (loading) {
@@ -87,7 +121,7 @@ export function SalesDashboard() {
             <div className="cell">Valor Total da Venda</div>
             <div className="cell">Quantidade de Produtos</div>
             <div className="cell">Data da compra</div>
-            <div className="cell">Detalhes da venda</div>
+            <div className="cell"></div>
           </div>
           {sales.map((sale) => {
             const totalQuantity = sale.items.reduce(
@@ -112,15 +146,11 @@ export function SalesDashboard() {
                 <div className="cell">{totalQuantity} produtos comprados</div>
                 <div className="cell">{formattedDate}</div>
                 <div className="cell">
-                  <button
-                    className="details"
-                    onClick={() => {
-                      fetchSaleById(sale._id);
-                      openDetailModal();
-                    }}
-                  >
-                    Detalhes
-                  </button>
+                  <Dropdown overlay={menu(sale._id)}>
+                    <Button className="dropdownButton">
+                      <EllipsisOutlined />
+                    </Button>
+                  </Dropdown>
                 </div>
               </div>
             );
