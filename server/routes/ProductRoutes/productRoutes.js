@@ -2,6 +2,7 @@ const express = require("express");
 const {
   createProduct,
   getAllProduct,
+  getProductbyId,
   updateProduct,
   deleteProduct,
 } = require("../../controller/ProductController/ProductController");
@@ -13,8 +14,11 @@ const router = express.Router();
 // Create a new product.
 router.post("/products", authMiddleware, createProduct);
 
-// Get all products of the logged-in user.
+// Get all products
 router.get("/products", authMiddleware, getAllProduct);
+
+// Get product by Id
+router.get("/products/:id", authMiddleware, getProductbyId);
 
 // Update a product.
 router.put("/products/:id", authMiddleware, updateProduct);
