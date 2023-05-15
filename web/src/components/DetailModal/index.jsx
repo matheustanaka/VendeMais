@@ -55,7 +55,7 @@ export function DetailModal({
           <div className="content-sale-modal">
             <div className="client-detail">
               <div className="detail-header">
-                <h1>Nome do Cliente</h1>
+                <h2>Nome do Cliente</h2>
                 <p>{sale.customer}</p>
                 <h2>Valor Total</h2>
                 <p>R$ {sale.totalAmount}</p>
@@ -71,7 +71,7 @@ export function DetailModal({
             <section className="table-section-sale">
               <div className="table-sale">
                 <div className="row-sale header-sale">
-                  <div className="cell-sale">Nome do Produto</div>
+                  <div className="cell-sale">Produto</div>
                   <div className="cell-sale">Preço</div>
                   <div className="cell-sale">Quantidade</div>
                 </div>
