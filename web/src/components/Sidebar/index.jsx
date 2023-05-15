@@ -1,5 +1,5 @@
 import Logout from "../../components/LogoutButton";
-import { FiShoppingBag, FiUsers } from "react-icons/fi";
+import { FiShoppingBag } from "react-icons/fi";
 import { BsBoxSeam } from "react-icons/bs";
 
 import { getAuth } from "firebase/auth";
