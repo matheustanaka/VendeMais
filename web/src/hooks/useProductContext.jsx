@@ -65,6 +65,82 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const deleteProduct = async (productId) => {
+    try {
+      const idToken = await getIdToken(auth.currentUser);
+
+      const response = await fetch(
+        `http://localhost:3000/products/${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: idToken,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Server responded with an error");
+      }
+
+      fetchProducts();
+    } catch (error) {
+      console.error("Error Deleting product:", error);
+    }
+  };
+
+  const editProduct = async (productId, updatedProduct) => {
+    try {
+      const idToken = await getIdToken(auth.currentUser);
+
+      const response = await fetch(
+        `http://localhost:3000/products/${productId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: idToken,
+          },
+          body: JSON.stringify(updatedProduct),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Server responded with an error");
+      }
+
+      fetchProducts();
+    } catch (error) {
+      console.error("Error editing product:", error);
+    }
+  };
+
+  const fetchProductById = async (productId) => {
+    try {
+      const idToken = await getIdToken(auth.currentUser);
+
+      const response = await fetch(
+        `http://localhost:3000/products/${productId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: idToken,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Server responded with an error");
+      }
+
+      const product = await response.json();
+      return product;
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -87,6 +163,9 @@ export const ProductProvider = ({ children }) => {
         description,
         setDescription,
         addProduct,
+        editProduct,
+        fetchProductById,
+        deleteProduct,
       }}
     >
       {children}

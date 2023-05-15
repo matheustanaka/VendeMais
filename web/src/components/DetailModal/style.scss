@@ -69,12 +69,17 @@
     .client-detail {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
+        text-align: center;
 
         margin: 10px auto;
 
         .detail-header {
             margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
         }
 
         h2,
@@ -83,7 +88,7 @@
         }
 
         p {
-            font-size: 20px;
+            font-size: 22px;
             color: var(--primary);
             font-weight: 700;
         }
@@ -93,7 +98,7 @@
     .table-section-sale {
         display: flex;
         justify-content: center;
-        align-items: center;
+        text-align: center;
 
         margin: 15px auto;
 
@@ -104,12 +109,13 @@
             width: 100%;
             height: 100%;
 
-            text-align: justify;
+            text-align: center;
         }
 
         .row-sale {
             display: flex;
             flex-direction: row;
+            text-align: center;
 
             color: var(--caption);
 
@@ -130,10 +136,10 @@
             color: var(--text);
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
+            text-align: center;
         }
 
         .cell-sale {
-            display: flex;
             padding: 10px 25px;
             flex-basis: 0;
             flex-grow: 1;

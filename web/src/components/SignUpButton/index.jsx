@@ -2,15 +2,15 @@ import { useAuth } from "../../hooks/useAuth";
 
 import "./style.scss";
 
-const Login = () => {
+const SignUp = () => {
   const { handleGoogleLogin } = useAuth();
   return (
     <div>
-      <button className="sign-in" onClick={handleGoogleLogin}>
-        Entrar
+      <button className="sign-up" onClick={handleGoogleLogin}>
+        Inscreva-se
       </button>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;

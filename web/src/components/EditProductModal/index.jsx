@@ -4,7 +4,11 @@ import "./style.scss";
 
 Modal.setAppElement("#root"); // This line is important for accessibility and must point to your app root.
 
-export function ProductModal({ modalIsOpen, closeModal }) {
+export function EditProductModal({
+  editModalIsOpen,
+  EditCloseModal,
+  productId,
+}) {
   const {
     name,
     setName,
@@ -12,7 +16,7 @@ export function ProductModal({ modalIsOpen, closeModal }) {
     setPrice,
     description,
     setDescription,
-    addProduct,
+    editProduct,
   } = useProductContext();
 
   const handleChangeName = (e) => {
@@ -29,32 +33,36 @@ export function ProductModal({ modalIsOpen, closeModal }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addProduct();
+    editProduct(productId, {
+      name: name,
+      description: description,
+      price: price,
+    });
 
     setName("");
     setDescription("");
     setPrice("");
 
-    closeModal();
+    EditCloseModal();
   };
 
   return (
     <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
+      isOpen={editModalIsOpen}
+      onRequestClose={EditCloseModal}
       contentLabel="Product Modal"
       className="product-modal"
     >
-      <div onClick={closeModal} className="overlay">
+      <div onClick={EditCloseModal} className="overlay">
         <div
           onClick={(e) => {
             e.stopPropagation();
           }}
-          className="productModalContainer"
+          className="modalContainer"
         >
           <div className="header-modal">
-            <h1 className="title-modal">Adicionar Produto</h1>
-            <p className="closeBtn" onClick={closeModal}>
+            <h1 className="title-modal">Editar Produto</h1>
+            <p className="closeBtn" onClick={EditCloseModal}>
               Fechar
             </p>
           </div>
@@ -69,7 +77,7 @@ export function ProductModal({ modalIsOpen, closeModal }) {
                 value={name}
                 onChange={handleChangeName}
               />
-              <label className="label-product">Descrição do Produto</label>
+              <label className="label-product">Descricão do Produto</label>
               <input
                 className="input"
                 type="text"
@@ -86,7 +94,7 @@ export function ProductModal({ modalIsOpen, closeModal }) {
                 onChange={handleChangePrice}
               />
               <button className="btn-modal" type="submit">
-                Cadastrar Produto
+                Atualizar Produto
               </button>
             </form>
           </div>

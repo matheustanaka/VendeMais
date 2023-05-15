@@ -34,7 +34,7 @@ export default function AuthProvider({ children }) {
       // Verify auth state to navigate into sales page
       authState.onAuthStateChanged((user, error) => {
         if (user) {
-          navigate("/sales");
+          navigate("/products");
         } else {
           const errorCode = error.code;
           const errorMessage = error.message;

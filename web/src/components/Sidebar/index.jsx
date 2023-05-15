@@ -41,11 +41,6 @@ export function Sidebar() {
                 <BsBoxSeam style={{ marginRight: "8px" }} /> Vendas
               </a>
             </li>
-            <li>
-              <a href="/clients">
-                <FiUsers style={{ marginRight: "8px" }} /> Clientes
-              </a>
-            </li>
           </ul>
         </nav>
         <div className="exit">

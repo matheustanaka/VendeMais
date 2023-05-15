@@ -1,3 +1,5 @@
+import { Menu, Dropdown, Button } from "antd";
+import { EllipsisOutlined } from "@ant-design/icons";
 import { SalesModal } from "../SalesModal";
 import { DetailModal } from "../DetailModal";
 import { useSalesContext } from "../../hooks/useSalesContext";
@@ -9,29 +11,65 @@ export function SalesDashboard() {
   const [detailModalIsOpen, setDetailModalIsOpen] = useState(false);
   const { sales, loading, fetchSaleById, saleById } = useSalesContext();
 
+  const menu = (saleById) => (
+    <Menu style={{ background: "var(--background)" }}>
+      <Menu.Item className="dropdownItem" key="0">
+        <button
+          style={{
+            color: "white",
+            border: "none",
+            background: "var(--background)",
+          }}
+          onClick={() => {
+            fetchSaleById(saleById);
+            openDetailModal();
+          }}
+        >
+          Detalhes
+        </button>
+      </Menu.Item>
+      {/* <Menu.Item className="dropdownItem" key="1">
+        <button
+          style={{
+            color: "white",
+            border: "none",
+            background: "var(--background)",
+          }}
+          onClick={handleDeleteProduct(id)}
+        >
+          Deletar
+        </button>
+      </Menu.Item> */}
+    </Menu>
+  );
+
   // wait sales data load
   if (loading) {
     return <div>Loading...</div>;
   }
+  const currentBalance =
+    sales && sales.length > 0
+      ? sales.reduce((total, item) => total + item.totalAmount, 0)
+      : "0";
 
-  const currentBalance = sales.reduce(
-    (total, item) => total + item.totalAmount,
-    0
-  );
+  const items =
+    sales && sales.length > 0 ? sales.flatMap((sale) => sale.items) : [];
 
-  // transform items in array
-  const items = sales.flatMap((sale) => sale.items);
-  const productsSold = items.reduce((total, i) => total + i.quantity, 0);
+  const productsSold =
+    items && items.length > 0
+      ? items.reduce((total, i) => total + i.quantity, 0)
+      : "0";
 
-  const lastSale = sales[sales.length - 1];
-  const dateLastSale = new Date(lastSale.createdAt);
-  const FormattedDateLastSale = `${String(dateLastSale.getDate()).padStart(
-    2,
-    "0"
-  )}/${String(dateLastSale.getMonth() + 1).padStart(
-    2,
-    "0"
-  )}/${dateLastSale.getFullYear()}`;
+  const lastSale = sales && sales.length > 0 ? sales[sales.length - 1] : null;
+
+  const dateLastSale = lastSale ? new Date(lastSale.createdAt) : "N/A";
+
+  const FormattedDateLastSale =
+    dateLastSale !== "N/A"
+      ? `${String(dateLastSale.getDate()).padStart(2, "0")}/${String(
+          dateLastSale.getMonth() + 1
+        ).padStart(2, "0")}/${dateLastSale.getFullYear()}`
+      : "N/A";
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -72,7 +110,7 @@ export function SalesDashboard() {
         <div className="card">
           <h1>Última Venda</h1>
           <h4>
-            {lastSale.customer}, {FormattedDateLastSale}
+            {lastSale ? `${lastSale.customer}, ${FormattedDateLastSale}` : ""}
           </h4>
         </div>
       </div>
@@ -83,7 +121,7 @@ export function SalesDashboard() {
             <div className="cell">Valor Total da Venda</div>
             <div className="cell">Quantidade de Produtos</div>
             <div className="cell">Data da compra</div>
-            <div className="cell">Detalhes da venda</div>
+            <div className="cell"></div>
           </div>
           {sales.map((sale) => {
             const totalQuantity = sale.items.reduce(
@@ -108,15 +146,11 @@ export function SalesDashboard() {
                 <div className="cell">{totalQuantity} produtos comprados</div>
                 <div className="cell">{formattedDate}</div>
                 <div className="cell">
-                  <button
-                    className="details"
-                    onClick={() => {
-                      fetchSaleById(sale._id);
-                      openDetailModal();
-                    }}
-                  >
-                    Detalhes
-                  </button>
+                  <Dropdown overlay={menu(sale._id)}>
+                    <Button className="dropdownButton">
+                      <EllipsisOutlined />
+                    </Button>
+                  </Dropdown>
                 </div>
               </div>
             );

@@ -26,17 +26,16 @@
             justify-content: flex-end;
 
             .register-product {
-                background-color: var(--text);
+                background-color: var(--primary);
                 padding: 12px;
 
-                color: var(--background);
+                color: var(--text);
                 font-size: 16px;
                 font-weight: 500;
                 cursor: pointer;
 
                 border: 1px solid transparent;
                 border-radius: 4px;
-                border: 1px solid;
                 transition: all 0.4s ease-in-out;
             }
 
@@ -94,6 +93,18 @@
             padding: 10px 25px;
             flex-basis: 0;
             flex-grow: 1;
+        }
+
+        .dropdownButton {
+            color: var(--text);
+            background-color: var(--background-light);
+            border: none;
+            // border: 1px solid hsla(0, 0%, 100%, 0.096);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .dropdownButton:hover {
+            background-color: var(--background);
         }
     }
 }

@@ -1,6 +1,6 @@
 .wrapper {
   max-width: 100%;
-  height: 90vh;
+  height: 100vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -21,6 +21,10 @@
       letter-spacing: -.02em;
 
       margin-bottom: 15px;
+
+      .span-title {
+        color: var(--primary);
+      }
     }
 
     .description {
@@ -32,6 +36,10 @@
         text-align: center;
 
         letter-spacing: -0.029375rem, inherit;
+
+        .span-paragraph {
+          color: var(--primary);
+        }
       }
     }
 
@@ -42,8 +50,8 @@
       font-size: 16px;
       font-weight: 500;
 
-      color: var(--background);
-      background-color: var(--text);
+      color: var(--text);
+      background-color: var(--primary);
       border: 1px solid transparent;
       border-radius: 4px;
       transition: all 0.4s ease-in-out;
@@ -58,4 +66,76 @@
 
   }
 
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 40px;
+
+  .aboutTitle {
+    font-size: 3rem;
+    margin-bottom: 25px;
+    color: var(--primary);
+  }
+
+  .main-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+
+    .team {
+      display: flex;
+      flex-direction: row;
+      gap: 25px;
+
+      .card-user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--background-light);
+        border: 1px solid hsla(0, 0%, 100%, 0.096);
+        border-radius: 10px;
+        padding: 50px;
+
+        img {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 10px;
+          border: 1px solid hsla(0, 0%, 100%, 0.096);
+
+        }
+
+        h1 {
+          font-size: 1.5rem;
+          margin-bottom: 5px;
+          color: var(--text);
+        }
+
+        p {
+          font-size: 1rem;
+          color: var(--primary);
+        }
+      }
+    }
+
+    .product-text {
+      margin-top: 25px;
+      text-align: center;
+      width: 100%;
+      color: var(--text);
+
+      p {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+    }
+  }
 }

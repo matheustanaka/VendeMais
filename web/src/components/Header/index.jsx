@@ -1,3 +1,4 @@
+import SignUp from "../SignUpButton";
 import Login from "../../components/LoginButton";
 import "./style.scss";
 
@@ -11,17 +12,20 @@ export function Header() {
         <div className="list">
           <ul className="list-btns">
             <li>
-              <a href="">Sobre nós</a>
+              <a href="#about">Sobre Nós</a>
             </li>
             <li>
-              <a href="">Clientes</a>
+              <a href="">Segmentos</a>
             </li>
             <li>
-              <a href="">Precos</a>
+              <a href="">Planos</a>
             </li>
           </ul>
         </div>
-        <Login />
+        <div className="btn-login-register">
+          <SignUp />
+          <Login />
+        </div>
       </header>
     </div>
   );
