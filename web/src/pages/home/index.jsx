@@ -49,7 +49,7 @@ export function Home() {
             </div>
             <div className="card-user">
               <img src={luis} alt="" />
-              <h1>luis</h1>
+              <h1>Luís</h1>
               <p>Desenvolvedor</p>
             </div>
             <div className="card-user">
