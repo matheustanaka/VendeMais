@@ -73,7 +73,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   padding: 40px;
 
   .aboutTitle {
@@ -135,6 +135,247 @@
       p {
         font-size: 18px;
         margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  width: 100%;
+
+  .product-functionality {
+    padding-top: 20px;
+    flex-basis: 100%;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary);
+    padding: 10px;
+
+    gap: 100px;
+
+    img {
+      width: 30%;
+    }
+
+    h1 {
+      font-size: 60px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 30px;
+      text-align: center;
+      font-weight: 500;
+    }
+  }
+
+  .functionality-card {
+    flex-basis: 100%;
+    text-align: center;
+    height: 55%;
+    background-color: var(--background);
+
+    .title-functional {
+      font-size: 45px;
+      margin: 20px auto;
+      color: var(--text);
+    }
+
+    .main-card {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 50px;
+      margin: 10px 20px;
+    }
+
+    .card {
+      /* Styles for the card user */
+      background-color: var(--background-light);
+      border-radius: 8px;
+      border: 1px solid;
+      border-color: hsla(0, 0%, 100%, 0.233);
+      width: 50%;
+      margin: 10px;
+      padding: 20px;
+      text-align: center;
+
+      img {
+        width: 35%;
+      }
+
+      h1 {
+        font-size: 25px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+section.plan {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+
+  .price-title {
+    margin: 20px;
+    text-align: center;
+
+    h1 {
+      font-size: 45px;
+    }
+  }
+
+  .price-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    width: 80%;
+    gap: 20px;
+
+
+    .price-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 350px;
+      height: 450px;
+      margin: 0 10px;
+      border-radius: 8px;
+
+      background-color: var(--background-light);
+      border: 1px solid;
+      border-color: hsla(0, 0%, 100%, 0.233);
+
+
+      h1 {
+        text-align: center;
+        font-size: 35px;
+        color: var(--primary);
+      }
+
+      h2 {
+        text-align: center;
+        font-size: 30px;
+      }
+
+      .pricing-card-features {
+        margin: 5px;
+
+        li {
+          font-size: 16px;
+          color: var(--text);
+          padding: 5px 0;
+          text-align: center;
+          list-style: none;
+          margin: 3px;
+
+        }
+      }
+
+      .email-button {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: var(--secondary);
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+
+      li {
+        margin: 0 10px;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+          color: #ccc;
+        }
+      }
+    }
+  }
+}
+
+.site-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+
+      li {
+        margin: 0 10px;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+          color: #ccc;
+        }
       }
     }
   }
