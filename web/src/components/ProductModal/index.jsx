@@ -50,7 +50,7 @@ export function ProductModal({ modalIsOpen, closeModal }) {
           onClick={(e) => {
             e.stopPropagation();
           }}
-          className="modalContainer"
+          className="productModalContainer"
         >
           <div className="header-modal">
             <h1 className="title-modal">Adicionar Produto</h1>
@@ -69,7 +69,7 @@ export function ProductModal({ modalIsOpen, closeModal }) {
                 value={name}
                 onChange={handleChangeName}
               />
-              <label className="label-product">Descricão do Produto</label>
+              <label className="label-product">Descrição do Produto</label>
               <input
                 className="input"
                 type="text"
