@@ -6,7 +6,7 @@ const Login = () => {
   const { handleGoogleLogin } = useAuth();
   return (
     <div>
-      <button className="sign-up" onClick={handleGoogleLogin}>
+      <button className="sign-in" onClick={handleGoogleLogin}>
         Entrar
       </button>
     </div>
