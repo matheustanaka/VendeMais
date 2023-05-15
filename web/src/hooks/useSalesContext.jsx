@@ -11,7 +11,7 @@ export const SalesProvider = ({ children }) => {
   const [quantity, setQuantity] = useState("");
   const [sales, setSales] = useState([]);
   const [saleById, setSaleById] = useState(null);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([{ product: "", quantity: "" }]);
   const [loading, setLoading] = useState(true);
 
   const auth = getAuth();
