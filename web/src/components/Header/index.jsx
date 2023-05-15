@@ -12,7 +12,7 @@ export function Header() {
         <div className="list">
           <ul className="list-btns">
             <li>
-              <a href="">Sobre nós</a>
+              <a href="#about">Sobre Nós</a>
             </li>
             <li>
               <a href="">Segmentos</a>
