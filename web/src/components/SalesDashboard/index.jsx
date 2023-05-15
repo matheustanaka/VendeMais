@@ -28,18 +28,6 @@ export function SalesDashboard() {
           Detalhes
         </button>
       </Menu.Item>
-      {/* <Menu.Item className="dropdownItem" key="1">
-        <button
-          style={{
-            color: "white",
-            border: "none",
-            background: "var(--background)",
-          }}
-          onClick={handleDeleteProduct(id)}
-        >
-          Deletar
-        </button>
-      </Menu.Item> */}
     </Menu>
   );
 
@@ -51,6 +39,11 @@ export function SalesDashboard() {
     sales && sales.length > 0
       ? sales.reduce((total, item) => total + item.totalAmount, 0)
       : "0";
+
+  const formattedCurrentBalance = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(currentBalance);
 
   const items =
     sales && sales.length > 0 ? sales.flatMap((sale) => sale.items) : [];
@@ -100,7 +93,7 @@ export function SalesDashboard() {
         <div className="card">
           <h1>Saldo Atual</h1>
           <h4>
-            R$ <span>{currentBalance}</span>
+            <span>{formattedCurrentBalance}</span>
           </h4>
         </div>
         <div className="card">
@@ -139,10 +132,15 @@ export function SalesDashboard() {
               "0"
             )}/${date.getFullYear()}`;
 
+            const formattedTotalAmount = new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format(sale.totalAmount);
+
             return (
               <div className="row" key={sale._id}>
                 <div className="cell">{sale.customer}</div>
-                <div className="cell">R$ {sale.totalAmount}</div>
+                <div className="cell">{formattedTotalAmount}</div>
                 <div className="cell">{totalQuantity} produtos comprados</div>
                 <div className="cell">{formattedDate}</div>
                 <div className="cell">

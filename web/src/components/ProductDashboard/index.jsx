@@ -18,6 +18,7 @@ export function ProductDashboard() {
     setDescription,
     setPrice,
     deleteProduct,
+    setRawPrice,
   } = useProductContext();
 
   const openModal = () => {
@@ -27,7 +28,6 @@ export function ProductDashboard() {
   const closeModal = () => {
     setModalIsOpen(false);
   };
-
   const EditOpenModal = (productId) => async () => {
     setCurrentProductId(productId);
 
@@ -35,7 +35,13 @@ export function ProductDashboard() {
 
     setName(product.name);
     setDescription(product.description);
-    setPrice(product.price);
+    setRawPrice(product.price); // Set raw price
+    setPrice(
+      new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(product.price)
+    ); // Set formatted price
 
     setEditModalIsOpen(true);
   };
@@ -103,7 +109,12 @@ export function ProductDashboard() {
             <div className="row" key={product._id}>
               <div className="cell">{product.name}</div>
               <div className="cell">{product.description}</div>
-              <div className="cell">R$ {product.price}</div>
+              <div className="cell">
+                {new Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                }).format(product.price)}
+              </div>
               <div className="cell">
                 <Dropdown overlay={menu(product._id)}>
                   <Button className="dropdownButton">

@@ -12,13 +12,13 @@ export function Header() {
         <div className="list">
           <ul className="list-btns">
             <li>
+              <a href="#product">Produto</a>
+            </li>
+            <li>
               <a href="#about">Sobre Nós</a>
             </li>
             <li>
-              <a href="">Segmentos</a>
-            </li>
-            <li>
-              <a href="">Planos</a>
+              <a href="#plan">Planos</a>
             </li>
           </ul>
         </div>

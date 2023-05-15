@@ -9,6 +9,7 @@ export const ProductProvider = ({ children }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [rawPrice, setRawPrice] = useState(0);
 
   const auth = getAuth();
 
@@ -53,7 +54,7 @@ export const ProductProvider = ({ children }) => {
         body: JSON.stringify({
           name: name,
           description: description,
-          price: price,
+          price: rawPrice,
         }),
       });
 
@@ -160,6 +161,8 @@ export const ProductProvider = ({ children }) => {
         setName,
         price,
         setPrice,
+        rawPrice,
+        setRawPrice,
         description,
         setDescription,
         addProduct,
