@@ -41,11 +41,10 @@ export function SalesModal({ modalIsOpen, closeModal }) {
     setItems([...items, { product: "", quantity: "" }]);
   };
 
-  const handleRemoveItem = () => {
-    if (items.length > 1) {
-      // Prevent removing the last item
+  const handleRemoveItem = (index) => {
+    if (index > 0) {
       const newItems = [...items];
-      newItems.pop(); // Remove the last item
+      newItems.splice(index, 1);
       setItems(newItems);
     }
   };
@@ -79,7 +78,7 @@ export function SalesModal({ modalIsOpen, closeModal }) {
           <div className="header-modal">
             <h1 className="title-modal">Criar Venda</h1>
             <p className="closeBtn" onClick={closeModal}>
-              Fechar
+              Cancelar
             </p>
           </div>
 
@@ -87,7 +86,7 @@ export function SalesModal({ modalIsOpen, closeModal }) {
             <form className="form" onSubmit={handleSubmit}>
               <label className="label-sale">Nome do Cliente</label>
               <input
-                className="input"
+                className="input-name"
                 type="text"
                 name="title"
                 value={customer}
@@ -102,43 +101,48 @@ export function SalesModal({ modalIsOpen, closeModal }) {
                       className="my-select"
                     >
                       <option value="">Selecione um Produto</option>
-                      {products.map((product) => (
-                        <option key={product._id} value={product._id}>
-                          {product.name}
-                        </option>
-                      ))}
+                      {products.map((product) => {
+                        const formattedPrice = new Intl.NumberFormat("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        }).format(product.price);
+                        return (
+                          <option key={product._id} value={product._id}>
+                            {product.name} - {formattedPrice}
+                          </option>
+                        );
+                      })}
                     </select>
+                    <button
+                      type="button"
+                      className="btn-remove"
+                      onClick={() => handleRemoveItem(index)}
+                    >
+                      <AiOutlineMinus />
+                    </button>
                   </div>
                   <label className="label-sale">Quantidade</label>
                   <input
-                    className="input quantity"
+                    className="input-quantity"
                     type="number"
                     value={item.quantity}
                     onChange={handleChangeItemQuantity(index)}
                   />
+                  <div className="row"></div>
                 </div>
               ))}
-              <div className="buttons-space">
+              <div className="btn-fn">
                 <button
-                  className="btn-add"
                   type="button"
+                  className="btn-add"
                   onClick={handleAddItem}
                 >
-                  {/* <AiOutlinePlus size={20} color="white" /> */}
                   Adicionar Produto
                 </button>
-                <button
-                  type="button"
-                  className="btn-remove"
-                  onClick={handleRemoveItem}
-                >
-                  {/* <AiOutlineMinus size={20} color="white" /> */}
-                  Remover Produto
+                <button className="btn-sale" type="submit">
+                  Registrar Venda
                 </button>
               </div>
-              <button className="btn-sale" type="submit">
-                Registrar Venda
-              </button>
             </form>
           </div>
         </div>
