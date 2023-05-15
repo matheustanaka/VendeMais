@@ -13,6 +13,7 @@ export function ProductModal({ modalIsOpen, closeModal }) {
     description,
     setDescription,
     addProduct,
+    setRawPrice,
   } = useProductContext();
 
   const handleChangeName = (e) => {
@@ -24,7 +25,14 @@ export function ProductModal({ modalIsOpen, closeModal }) {
   };
 
   const handleChangePrice = (e) => {
-    setPrice(e.target.value);
+    let value = e.target.value;
+    value = parseFloat(value.replace(/[^\d]/g, "")) / 100; // remove non-digits and convert to real value
+    setRawPrice(value); // Update rawPrice instead of price
+    let formattedValue = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(value);
+    setPrice(formattedValue); // Update price for display
   };
 
   const handleSubmit = (event) => {
