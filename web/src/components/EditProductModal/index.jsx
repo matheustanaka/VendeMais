@@ -12,8 +12,8 @@ export function EditProductModal({
   const {
     name,
     setName,
-    price,
-    setPrice,
+    rawPrice,
+    setRawPrice,
     description,
     setDescription,
     editProduct,
@@ -28,7 +28,7 @@ export function EditProductModal({
   };
 
   const handleChangePrice = (e) => {
-    setPrice(e.target.value);
+    setRawPrice(e.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -36,12 +36,12 @@ export function EditProductModal({
     editProduct(productId, {
       name: name,
       description: description,
-      price: price,
+      price: rawPrice,
     });
 
     setName("");
     setDescription("");
-    setPrice("");
+    setRawPrice("");
 
     EditCloseModal();
   };
@@ -90,7 +90,7 @@ export function EditProductModal({
                 className="input"
                 type="text"
                 name="price"
-                value={price}
+                value={rawPrice}
                 onChange={handleChangePrice}
               />
               <button className="btn-modal" type="submit">
