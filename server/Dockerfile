@@ -27,5 +27,5 @@ COPY --chown=node:node . .
 EXPOSE 3000
 
 # Define the command to run your app
-CMD [ "node", "index.js" ]
+CMD [ "npm", "run", "start" ]
 
