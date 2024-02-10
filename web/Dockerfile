@@ -24,9 +24,9 @@ RUN npm install
 COPY --chown=node:node . .
 
 # Your app binds to port 3000 by default, make sure the port is exposed
-EXPOSE 5000
+EXPOSE 8000
 
 # Define the command to run your app
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "dev", "--host" ]
 
 
