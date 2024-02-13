@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image (Alpine version for smaller size)
-FROM node:21.4.0-alpine
+FROM node:20.4.0-alpine
 
 # Create app directory and set as WORKDIR. This ensures that all subsequent
 # commands are run from this directory.

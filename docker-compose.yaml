@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  web:
+    build: ./web/
+    ports:
+      - "5000:8000"
+    volumes:
+      - ./web:/home/node/code # Ajustado para apontar para o diretório específico do serviço web
+      - web_node_modules:/home/node/code/node_modules
+    depends_on:
+      - server
+
+  server:
+    build: ./server/
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server:/home/node/code # Ajustado para apontar para o diretório específico do serviço server
+      - server_node_modules:/home/node/code/node_modules
+
+volumes:
+  web_node_modules: # Define um volume nomeado para os node_modules do serviço web
+  server_node_modules: # Define um volume nomeado para os node_modules do serviço server
+
