@@ -5,7 +5,7 @@ services:
     ports:
       - "5000:8000"
     volumes:
-      - ./web:/home/node/code # Ajustado para apontar para o diretório específico do serviço web
+      - ./web:/home/node/code 
       - web_node_modules:/home/node/code/node_modules
     depends_on:
       - server
@@ -15,10 +15,18 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./server:/home/node/code # Ajustado para apontar para o diretório específico do serviço server
+      - ./server:/home/node/code 
       - server_node_modules:/home/node/code/node_modules
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    volumes:
+      - mongo_volumes:/data/db
 
 volumes:
-  web_node_modules: # Define um volume nomeado para os node_modules do serviço web
-  server_node_modules: # Define um volume nomeado para os node_modules do serviço server
+  web_node_modules: 
+  server_node_modules: 
+  mongo_volumes:
 
