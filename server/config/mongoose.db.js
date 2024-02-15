@@ -9,7 +9,7 @@ const connectDatabase = async () => {
 
   await mongoose
     .connect(
-      "mongodb://vendemais-mongodb:27017"
+      "mongodb://vendemais-mongodb-1:27017"
     )
     .then(() => console.log("We are connected to MongoDB"))
     .catch((error) =>
