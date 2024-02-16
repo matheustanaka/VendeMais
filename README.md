@@ -84,3 +84,9 @@ O Front-End da aplicação foi desenvolvido com [React.js](https://pt-br.react.d
 - [Express.js](https://expressjs.com/pt-br/)
 - [MongoDB](https://www.mongodb.com/)
 - [Firebase](https://firebase.google.com/?hl=pt-br)
+
+
+# TO-DO: 
+- Descobrir porque o k8s não estava aceitando os volumes mounts que estavam nos yamls.
+- Fazer o tunnel do minikube pra minha máquina local 
+- Executar os servicos que foram expostos
