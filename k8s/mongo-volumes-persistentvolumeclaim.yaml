@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: mongo-volumes
-  name: mongo-volumes
+  name: vendemais-mongo-volumes
   namespace: default
 spec:
   accessModes:
