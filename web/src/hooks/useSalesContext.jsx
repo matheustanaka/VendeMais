@@ -21,7 +21,7 @@ export const SalesProvider = ({ children }) => {
       const idToken = await getIdToken(auth.currentUser);
       console.log(idToken);
 
-      const response = await fetch("http://localhost:3000/sales", {
+      const response = await fetch(`${import.meta.env.REACT_APP_BACKEND_URL}/sales`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: idToken,
@@ -48,7 +48,7 @@ export const SalesProvider = ({ children }) => {
       const idToken = await getIdToken(auth.currentUser);
       console.log(idToken);
 
-      const response = await fetch(`http://localhost:3000/sales/${saleId}`, {
+      const response = await fetch(`${import.meta.env.REACT_APP_BACKEND_URL}/sales/${saleId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: idToken,
@@ -79,7 +79,7 @@ export const SalesProvider = ({ children }) => {
     try {
       const idToken = await getIdToken(auth.currentUser);
 
-      const response = await fetch("http://localhost:3000/sales", {
+      const response = await fetch(`${import.meta.env.REACT_APP_BACKEND_URL}/sales`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

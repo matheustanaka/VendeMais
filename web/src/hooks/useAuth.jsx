@@ -18,7 +18,7 @@ export default function AuthProvider({ children }) {
       const idToken = await getIdToken(result.user);
 
       // Send the ID token to your server for verification and user login
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch(`${import.meta.env.REACT_APP_BACKEND_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

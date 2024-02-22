@@ -19,7 +19,7 @@ export const ProductProvider = ({ children }) => {
 
       console.log(idToken);
 
-      const response = await fetch("http://localhost:3000/products", {
+      const response = await fetch(`${import.meta.env.REACT_APP_BACKEND_URL}/products`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: idToken,
@@ -45,7 +45,7 @@ export const ProductProvider = ({ children }) => {
 
       // console.log(idToken);
 
-      const response = await fetch("http://localhost:3000/products", {
+      const response = await fetch(`${import.meta.env.REACT_APP_BACKEND_URL}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export const ProductProvider = ({ children }) => {
       const idToken = await getIdToken(auth.currentUser);
 
       const response = await fetch(
-        `http://localhost:3000/products/${productId}`,
+        `${import.meta.env.REACT_APP_BACKEND_URL}/products/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -96,7 +96,7 @@ export const ProductProvider = ({ children }) => {
       const idToken = await getIdToken(auth.currentUser);
 
       const response = await fetch(
-        `http://localhost:3000/products/${productId}`,
+        `${import.meta.env.REACT_APP_BACKEND_URL}/products/${productId}`,
         {
           method: "PUT",
           headers: {
@@ -122,7 +122,7 @@ export const ProductProvider = ({ children }) => {
       const idToken = await getIdToken(auth.currentUser);
 
       const response = await fetch(
-        `http://localhost:3000/products/${productId}`,
+        `${import.meta.env.REACT_APP_BACKEND_URL}/products/${productId}`,
         {
           headers: {
             "Content-Type": "application/json",
