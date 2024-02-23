@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  web:
+    image: matheustanaka/vendemais-web:latest
+    ports:
+      - "5000:8000"
+    volumes:
+      - ./web:/home/node/code 
+      - web_node_modules:/home/node/code/node_modules
+    depends_on:
+      - server
+
+  server:
+    image: matheustanaka/vendemais-server:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server:/home/node/code 
+      - server_node_modules:/home/node/code/node_modules
+    env_file:
+      - ./web/.env
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_volumes:/data/db
+
+volumes:
+  web_node_modules: 
+  server_node_modules: 
+  mongo_volumes:
+
