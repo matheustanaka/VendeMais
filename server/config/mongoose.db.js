@@ -1,5 +1,8 @@
 const { error } = require("console");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
+
 
 // Mongo url
 // `mongodb+srv://admin:admin@cluster0.l4umjzd.mongodb.net/?retryWrites=true&w=majority`
@@ -9,7 +12,7 @@ const connectDatabase = async () => {
 
   await mongoose
     .connect(
-      "mongodb://vendemais-mongodb-1:27017"
+        `${process.env.DATABASE_URL}`
     )
     .then(() => console.log("We are connected to MongoDB"))
     .catch((error) =>
