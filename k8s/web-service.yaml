@@ -10,10 +10,12 @@ metadata:
   name: web
   namespace: default
 spec:
+  type: NodePort
   ports:
     - name: "5000"
       port: 5000
       targetPort: 8000
+      nodePort: 30019
   selector:
     io.kompose.service: web
 status:
