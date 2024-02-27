@@ -1,0 +1,48 @@
+# Use an official Node.js runtime as a parent image (Alpine version for smaller size)
+FROM node:20.4.0-alpine
+
+# Create app directory and set as WORKDIR. This ensures that all subsequent
+# commands are run from this directory.
+WORKDIR /home/node/code
+
+# Copy package.json and package-lock.json (if available) to leverage Docker cache
+COPY package*.json ./
+
+# Install app dependencies
+# Note: Do not switch user before npm install if packages need to install binary scripts
+RUN npm install 
+
+# Bundle app source
+COPY . .
+
+# Ensure the 'node' user owns the application files
+USER root
+RUN chown -R node:node /home/node/code
+USER node
+
+# Building app 
+RUN npm run build
+
+# Switch back to root to install and configure nginx
+USER root
+RUN apk add --no-cache nginx
+
+# Create a directory for Nginx PID and cache files
+RUN mkdir -p /run/nginx
+
+# Ensure the directory exists and have the right permissions
+RUN mkdir -p /usr/share/nginx/html/ && chown -R nginx:nginx /usr/share/nginx/html/
+
+# Copy the built static files to Nginx's serve directory
+RUN cp -R dist/* /usr/share/nginx/html/
+
+# Optional: Replace the default Nginx configuration file
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 80 for Nginx
+EXPOSE 80
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Start Nginx when the container is launched
+CMD ["nginx", "-g", "daemon off;"]
