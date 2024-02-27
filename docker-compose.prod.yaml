@@ -1,9 +1,9 @@
 version: "3.8"
 services:
   web:
-    image: matheustanaka/vendemais-web:2
+    image: matheustanaka/vendemais-web:3
     ports:
-      - "5000:8000"
+      - "5000:80"
     volumes:
       - ./web:/home/node/code 
       - web_node_modules:/home/node/code/node_modules
