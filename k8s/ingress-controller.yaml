@@ -4,7 +4,7 @@ metadata:
   name: example-ingress
 spec:
   rules:
-    - host: vendemais.test
+    - host: vendemais.frontend
       http:
         paths:
           - path: /
@@ -14,4 +14,13 @@ spec:
                 name: web
                 port:
                   number: 80
-
+    - host: vendemais.backend
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: server
+                port:
+                  number: 3000
