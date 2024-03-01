@@ -27,12 +27,15 @@ spec:
         io.kompose.service: server
     spec:
       containers:
-        - image: matheustanaka/vendemais-server:latest
+        - image: matheustanaka/vendemais-server:4 # tava usando a latest
           name: server
           ports:
             - containerPort: 3000
               hostPort: 3000
               protocol: TCP
           resources: {}
+          env:
+            - name: DATABASE_URL
+              value: "mongodb://vendemais-mongodb-1:27017"
       restartPolicy: Always
 status: {}
