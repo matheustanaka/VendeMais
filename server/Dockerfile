@@ -23,7 +23,7 @@ RUN npm install
 # Bundle app source
 COPY --chown=node:node . .
 
-ENV DATABASE_URL="mongodb://vendemais-mongodb-1:27017"
+# ENV DATABASE_URL="mongodb://vendemais-mongodb-1:27017"
 
 # Your app binds to port 3000 by default, make sure the port is exposed
 EXPOSE 3000
