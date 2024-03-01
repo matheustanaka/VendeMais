@@ -23,7 +23,6 @@ export function Header() {
           </ul>
         </div>
         <div className="btn-login-register">
-          <SignUp />
           <Login />
         </div>
       </header>
