@@ -27,7 +27,7 @@ spec:
         io.kompose.service: web
     spec:
       containers:
-        - image: matheustanaka/vendemais-web:3
+        - image: matheustanaka/vendemais-web:4
           name: web
           ports:
             - containerPort: 80
@@ -36,6 +36,6 @@ spec:
           resources: {}
           env:
             - name: REACT_APP_BACKEND_URL
-              value: "http://vendemais.test"
+              value: "http://vendemais.backend"
       restartPolicy: Always
 status: {}
