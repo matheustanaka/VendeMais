@@ -118,7 +118,7 @@ export function SalesModal({ modalIsOpen, closeModal }) {
                       className="btn-remove"
                       onClick={() => handleRemoveItem(index)}
                     >
-                      <AiOutlineMinus />
+                      Remover
                     </button>
                   </div>
                   <label className="label-sale">Quantidade</label>
