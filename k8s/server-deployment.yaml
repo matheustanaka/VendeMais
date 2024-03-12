@@ -8,7 +8,7 @@ metadata:
   labels:
     io.kompose.service: server
   name: server
-  namespace: default
+  namespace: vendemais
 spec:
   replicas: 1
   selector:
